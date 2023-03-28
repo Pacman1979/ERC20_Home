@@ -11,22 +11,33 @@ describe('Token', () => {
 	beforeEach(async () => {
 		// Fetch Home from the Blockchain
 		const Token = await ethers.getContractFactory('Token')
-		token = await Token.deploy('Home')
+		token = await Token.deploy('Home', 'HOME', '100000000')
 	})
 
-	it('has correct name', async () => {
-		expect(await token.name()).to.equal('Home')
+	describe('Deployment', () => {
+		const name = 'Home'
+		const symbol = 'HOME'
+		const decimals = '18'
+		const totalSupply = tokens('100000000')
+
+		it('has correct name', async () => {
+			expect(await token.name()).to.equal(name)
+		})
+
+		it('has correct symbol', async () => {
+			expect(await token.symbol()).to.equal(symbol)
+		})
+
+		it('has correct decimals', async () => {
+			expect(await token.decimals()).to.equal(decimals)
+		})
+
+		it('has correct total supply', async () => {
+			expect(await token.totalSupply()).to.equal(totalSupply)
+		})
 	})
 
-	it('has correct symbol', async () => {
-		expect(await token.symbol()).to.equal('HOME')
-	})
 
-	it('has correct decimals', async () => {
-		expect(await token.decimals()).to.equal('18')
-	})
 
-	it('has correct total supply', async () => {
-		expect(await token.totalSupply()).to.equal(tokens(100000000))
-	})
+
 })
