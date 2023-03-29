@@ -1,11 +1,11 @@
 async function main() {
   // Fetch contract to deploy
-  const Home = await ethers.getContractFactory("Home")
-  
+  const Token = await ethers.getContractFactory("Token")
+
   // Deploy contract
-  const home = await Home.deploy()
-  await home.deployed()
-  console.log(`Token deployed to: ${home.address}`)
+  const token = await Token.deploy('Home', 'HOME', '100000000')
+  await token.deployed()
+  console.log(`Token deployed to: ${token.address}`)
 }
 
 main()
